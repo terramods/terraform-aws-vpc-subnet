@@ -14,11 +14,11 @@ locals {
 }
 
 resource "aws_subnet" "tm_subnet" {
-  for_each = toset(var.cidr_blocks)
+  count = length(var.cidr_blocks)
 
   vpc_id = var.vpc_id
   cidr_block = each.value
-  availability_zone = var.availability_zones[index(var.cidr_blocks, each.key) % length(var.availability_zones)]
+  availability_zone = var.availability_zones[count.index % length(var.availability_zones)]
 
   tags = merge(
     {},
