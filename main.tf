@@ -17,7 +17,7 @@ resource "aws_subnet" "tm_subnet" {
   count = length(var.cidr_blocks)
 
   vpc_id = var.vpc_id
-  cidr_block = each.value
+  cidr_block = var.cidr_blocks[count.index]
   availability_zone = var.availability_zones[count.index % length(var.availability_zones)]
 
   tags = merge(
