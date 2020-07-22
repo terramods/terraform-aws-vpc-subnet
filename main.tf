@@ -25,3 +25,10 @@ resource "aws_subnet" "tm_subnet" {
     local.tm_tags
   )
 }
+
+module "internet_gateway" {
+  source = "git::git@github.com:terramods/terraform-aws-vpc-internet_gateway.git"
+
+  aws_profile = var.aws_profile
+  aws_region = var.aws_region
+}
